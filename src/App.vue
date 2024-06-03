@@ -21,6 +21,7 @@
       </template>
     </el-progress>
   </div>
+  <RouterLink to="/user">Go to HelloWorld </RouterLink>
 </template>
 
 <script lang="ts" setup>
