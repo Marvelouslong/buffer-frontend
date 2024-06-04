@@ -1,11 +1,11 @@
 <!-- InfiniteList.vue -->
 <template>
-  <el-descriptions :title="`${bufferValue}`" :column="1" style="width: 400px;margin-left: 20px;">
+  <el-descriptions :title="`${bufferValue}`" :column="1" style="width: 400px;margin-left: 20px;margin-top: 5px;background-color: rgba(240,255,255,0.09);">
     <el-descriptions-item label="buffer中数据个数" class="el-descriptions-item">222</el-descriptions-item>
     <el-descriptions-item label="已放入数据个数" class="el-descriptions-item">      180</el-descriptions-item>
     <el-descriptions-item label="已取出数据个数" class="el-descriptions-item">      111</el-descriptions-item>
   </el-descriptions>
-  <el-scrollbar ref="scrollbarRef" style="height: 300px;width: 300px;margin: 30px 70px;">
+  <el-scrollbar ref="scrollbarRef" style="height: 300px;width: 290px;margin: 30px 70px;">
     <div ref="innerRef">
       <p v-for="item in 20" :key="item" class="scrollbar-demo-item">
         {{ item }}
@@ -32,7 +32,6 @@ onMounted(() => {
   max.value = innerRef.value!.clientHeight - 380
 })
 </script>
-
 <style scoped>
 .scrollbar-demo-item {
   display: flex;

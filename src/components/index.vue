@@ -6,16 +6,8 @@
         </el-header>
       </el-container>
       <div class="button-container">
-        <el-button @click="gotoMain" type="primary" class="custom-button-3">启动</el-button>
-        <!-- 用于显示路由视图的RouterView -->
-
-          <!--
-            tag="a"
-            href="https://github.com/element-plus/element-plus"
-            target="_blank"
-            rel="noopener noreferrer"-->
+        <el-button @click="gotoIndex" type="primary" class="custom-button-3">启动</el-button>
       </div>
-      <router-view></router-view>
     </div>
 </template>
 
@@ -74,13 +66,10 @@
 </style>
 
 <script setup lang="ts">
-//import { ref } from 'vue'; // 如果需要响应式状态，可以导入 ref
 import { useRouter } from 'vue-router'; // 导入 useRouter 钩子
 
 const router = useRouter(); // 使用 useRouter 钩子获取路由实例
-
-// 定义 gotoMain 方法
-const gotoMain = () => {
+const gotoIndex = () => {
   console.log("跳转到主页面");
   router.push('/input'); // 跳转到主页路由
 };

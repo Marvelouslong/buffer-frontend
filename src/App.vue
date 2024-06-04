@@ -1,11 +1,9 @@
 <template>
-  <work />
-<!--  <index />-->
+  <Toindex />
 </template>
 
 <script lang="ts" setup>
-import Work from "./components/work.vue";
-import Index from "./components/index.vue";
+import Toindex from "./components/Toindex.vue";
 </script>
 
 <style scoped>
