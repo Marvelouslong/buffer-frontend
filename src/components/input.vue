@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import { ref } from 'vue'
 
 const buf1Capa = ref(10)
@@ -28,8 +28,8 @@ const gotoWork = () => {
       请分别设置缓冲区容量、PUT、MOVE、GET个数，否则按默认值设置
     </el-header>
   </el-container>
-
-    <div class="slider-demo-block mgl">
+  <div class="settings_background_">
+    <div class="slider-demo-block mgl" style="margin-top: 20px">
       <span class="demonstration">buffer1的容量</span>
       <el-slider v-model="buf1Capa" show-input />
     </div>
@@ -53,9 +53,11 @@ const gotoWork = () => {
       <span class="demonstration">GET的数量</span>
       <el-slider v-model="getNum" show-input/>
     </div>
-    <div class="setting_button_ ">
+    <div class="setting_button_ " style="margin-bottom: 20px">
       <el-button @click="gotoWork" color="#626aef" size="large" class="custom-button-3">确认设置</el-button>
+
     </div>
+  </div>
 </div>
 
 
@@ -65,17 +67,24 @@ const gotoWork = () => {
 
 
 <style scoped>
-* {
+/** {
   border: 1px solid black;
-}
+}*/
 /*确认设置按钮设置*/
 .setting_button_{
   margin-top:4%;
   margin-left: 45%;
 }
-/*背景设置*/
+/*滑块背景设置*/
+.settings_background_{
+  background-color: rgba(249,249,249,0.62);
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+/*页面背景设置*/
 .input_background_ {
-  background-image: url('../assets/index_bg.jpg'); /* 注意路径可能需要调整 */
+  background-image: url('../assets/input_bg.jpg'); /* 注意路径可能需要调整 */
   background-size: cover; /* 根据需要调整背景图片大小 */
   background-position: center; /* 根据需要调整背景图片位置 */
   background-repeat: no-repeat; /* 不重复背景图片 */
@@ -100,7 +109,7 @@ const gotoWork = () => {
 
 /*设置左边距，使滑块居中*/
 .mgl {
-  margin-left: 32%;
+  margin-left: 25%;
 }
 
 .slider-demo-block {
