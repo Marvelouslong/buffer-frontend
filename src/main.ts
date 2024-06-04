@@ -6,12 +6,12 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 //route
 import routes from "./route/route"
-import { createRouter, createWebHashHistory} from 'vue-router'
+import * as VueRouter from 'vue-router';
 
 const app = createApp(App)
 
-const router = createRouter({
-    history: createWebHashHistory(),
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHistory(),
     routes,
 })
 
