@@ -118,4 +118,5 @@ const getNum = ref(20)
  justify-content: center;
  height: 50vh;  设置容器高度为视口高度，使其垂直居中
 }*/
+
 </style>
