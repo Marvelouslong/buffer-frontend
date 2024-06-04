@@ -25,7 +25,7 @@ import InfiniteList from "./InfiniteList.vue";
 .container{
   width: 1485px;
   height: 730px;
-  background-image: url('../assets/test3.png'); /* 注意路径可能需要调整 */
+  background-image: url('../assets/han.png'); /* 注意路径可能需要调整 */
   background-size: cover; /* 根据需要调整背景图片大小 */
   background-position: center; /* 根据需要调整背景图片位置 */
   background-repeat: no-repeat; /* 不重复背景图片 */
