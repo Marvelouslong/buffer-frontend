@@ -80,6 +80,7 @@ const gotoWork = () => {
   background-color: rgba(249,249,249,0.62);
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 170px;
 }
 
 /*页面背景设置*/
