@@ -82,6 +82,6 @@ const router = useRouter(); // 使用 useRouter 钩子获取路由实例
 // 定义 gotoMain 方法
 const gotoMain = () => {
   console.log("跳转到主页面");
-  router.push('/main'); // 跳转到主页路由
+  router.push('/input'); // 跳转到主页路由
 };
 </script>

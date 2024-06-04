@@ -8,6 +8,14 @@ const putNum = ref(10)
 const moveNum = ref(2)
 const getNum = ref(20)
 
+/*import { isDark } from '~/composables/dark'*/
+
+import { useRouter } from 'vue-router'; // 导入 useRouter 钩子
+const router = useRouter(); // 使用 useRouter 钩子获取路由实例
+const gotoWork = () => {
+  console.log("跳转到运行界面");
+  router.push('/work');
+};
 </script>
 
 
@@ -22,30 +30,36 @@ const getNum = ref(20)
   </el-container>
 
     <div class="slider-demo-block mgl">
-      <span class="demonstration">buffer1 capacity</span>
+      <span class="demonstration">buffer1的容量</span>
       <el-slider v-model="buf1Capa" show-input />
     </div>
     <div class="slider-demo-block mgl">
-    <span class="demonstration">buffer2 capacity</span>
+    <span class="demonstration">buffer2的容量</span>
     <el-slider v-model="buf2Capa" show-input />
     </div>
     <div class="slider-demo-block mgl">
-    <span class="demonstration">buffer2 capacity</span>
+    <span class="demonstration">buffer3的容量</span>
     <el-slider v-model="buf3Capa" show-input />
    </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">PUT number</span>
+      <span class="demonstration">PUT的数量</span>
       <el-slider v-model="putNum" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">MOVE number</span>
+      <span class="demonstration">MOVE的数量</span>
       <el-slider v-model="moveNum" disabled show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">GET number</span>
+      <span class="demonstration">GET的数量</span>
       <el-slider v-model="getNum" show-input/>
     </div>
+    <div class="setting_button_ ">
+      <el-button @click="gotoWork" color="#626aef" size="large" class="custom-button-3">确认设置</el-button>
+    </div>
 </div>
+
+
+
 </template>
 
 
@@ -54,7 +68,12 @@ const getNum = ref(20)
 * {
   border: 1px solid black;
 }
-
+/*确认设置按钮设置*/
+.setting_button_{
+  margin-top:4%;
+  margin-left: 45%;
+}
+/*背景设置*/
 .input_background_ {
   background-image: url('../assets/index_bg.jpg'); /* 注意路径可能需要调整 */
   background-size: cover; /* 根据需要调整背景图片大小 */
@@ -63,7 +82,7 @@ const getNum = ref(20)
   min-height: 99vh; /* 确保至少占据整个视口的高度 */
   /* 可能还需要考虑 Element UI 组件的默认样式和边距 */
 }
-
+/*标题文字设置*/
 .head_font_ {
   /* 设置字体大小 */
   font-size: 30px;
@@ -118,5 +137,6 @@ const getNum = ref(20)
  justify-content: center;
  height: 50vh;  设置容器高度为视口高度，使其垂直居中
 }*/
+
 
 </style>
