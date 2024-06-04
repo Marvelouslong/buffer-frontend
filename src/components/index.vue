@@ -20,12 +20,8 @@
 </template>
 
 <style scoped>
-.layout {
-  /* 这里不需要背景样式，除非您想要对内部元素有额外的背景处理 */
-}
 
 .common-layout {
-
   background-image: url('../assets/test3.png'); /* 注意路径可能需要调整 */
   background-size: cover; /* 根据需要调整背景图片大小 */
   background-position: center; /* 根据需要调整背景图片位置 */
