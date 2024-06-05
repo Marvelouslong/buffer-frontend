@@ -4,9 +4,20 @@ import { ref } from 'vue'
 const buf1Capa = ref(10)
 const buf2Capa = ref(20)
 const buf3Capa = ref(20)
-const putNum = ref(10)
-const moveNum = ref(2)
-const getNum = ref(20)
+
+const put1Num = ref(10)
+
+const move2Num= ref(20)
+const move3Num = ref(20)
+
+const get2Num = ref(20)
+const get3Num= ref(20)
+
+const put1Speed= ref(60)
+const move2Speed= ref(60)
+const move3Speed= ref(60)
+const get2Speed= ref(60)
+const get3Speed= ref(60)
 
 /*import { isDark } from '~/composables/dark'*/
 
@@ -16,6 +27,11 @@ const gotoWork = () => {
   console.log("跳转到运行界面");
   router.push('/work');
 };
+/*设置速度的最高值：5秒运动一次*/
+const formatTooltip = (val: number) => {
+  return val / 20
+}
+
 </script>
 
 
@@ -25,7 +41,8 @@ const gotoWork = () => {
 <div class="input_background_">
   <el-container >
     <el-header class="head_font_">
-      请分别设置缓冲区容量、PUT、MOVE、GET个数，否则按默认值设置
+      请分别设置缓冲区容量、PUT、MOVE、GET个数以及速度，否则按默认值设置
+      <p style="font-size: 20px;color: rgba(216,246,26,0.83)">buffer1由PUT，MOVE2,MOVE3操作；buffer2由MOVE2,GET2操作；buffer3由MOVE3,GET3操作；</p>
     </el-header>
   </el-container>
   <div class="settings_background_">
@@ -42,20 +59,47 @@ const gotoWork = () => {
     <el-slider v-model="buf3Capa" show-input />
    </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">PUT的数量</span>
-      <el-slider v-model="putNum" show-input/>
+      <span class="demonstration">buf1的PUT1数量</span>
+      <el-slider v-model="put1Num" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">MOVE的数量</span>
-      <el-slider v-model="moveNum" disabled show-input/>
+      <span class="demonstration">buf2的MOVE2数量</span>
+      <el-slider v-model="move2Num" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">GET的数量</span>
-      <el-slider v-model="getNum" show-input/>
+      <span class="demonstration">buf3的MOVE3数量</span>
+      <el-slider v-model="move3Num" show-input/>
     </div>
-    <div class="setting_button_ " style="margin-bottom: 20px">
+    <div class="slider-demo-block mgl">
+      <span class="demonstration">buf2的GET2数量</span>
+      <el-slider v-model="get2Num" show-input/>
+    </div>
+    <div class="slider-demo-block mgl">
+      <span class="demonstration">buf3的GET3数量</span>
+      <el-slider v-model="get3Num" show-input/>
+    </div>
+    <div class="slider-demo-block mgl" style="margin-top: 10px">
+      <span class="demonstration">PUT1的速度</span>
+      <el-slider v-model="put1Speed" :format-tooltip="formatTooltip"/>
+    </div>
+    <div class="slider-demo-block mgl">
+      <span class="demonstration">MOVE2的速度</span>
+      <el-slider v-model="move2Speed" :format-tooltip="formatTooltip" />
+    </div>
+    <div class="slider-demo-block mgl">
+      <span class="demonstration">MOVE3的速度</span>
+      <el-slider v-model="move3Speed" :format-tooltip="formatTooltip" />
+    </div>
+    <div class="slider-demo-block mgl">
+      <span class="demonstration">GET2的速度</span>
+      <el-slider v-model="get2Speed" :format-tooltip="formatTooltip" />
+    </div>
+    <div class="slider-demo-block mgl">
+      <span class="demonstration">GET3的速度</span>
+      <el-slider v-model="get3Speed" :format-tooltip="formatTooltip" />
+    </div>
+    <div class="setting_button_ " style="margin-bottom: 10px">
       <el-button @click="gotoWork" color="#626aef" size="large" class="custom-button-3">确认设置</el-button>
-
     </div>
   </div>
 </div>
@@ -98,7 +142,7 @@ const gotoWork = () => {
   font-size: 30px;
   /* 设置绝对定位 */
   position: absolute;
-  top: 20%; /* 距离顶部的距离，根据您的需要调整 */
+  top: 10%; /* 距离顶部的距离，根据您的需要调整 */
   left: 50%; /* 水平居中，相对于其最近的已定位祖先元素（而不是视口） */
   transform: translateX(-50%); /* 偏移自身宽度的50%，以实现真正的水平居中 */
 
