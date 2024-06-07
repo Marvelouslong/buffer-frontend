@@ -1,5 +1,6 @@
 <script setup lang="ts" xmlns="http://www.w3.org/1999/html">
 import { ref } from 'vue'
+import myAxios from "../plugins/myAxios.ts";
 
 const buf1Capa = ref(10)
 const buf2Capa = ref(20)
@@ -13,17 +14,28 @@ const move3Num = ref(20)
 const get2Num = ref(20)
 const get3Num= ref(20)
 
-const put1Speed= ref(60)
-const move2Speed= ref(60)
-const move3Speed= ref(60)
-const get2Speed= ref(60)
-const get3Speed= ref(60)
+const putSpeed= ref(60)
+const moveSpeed= ref(60)
+const getSpeed= ref(60)
 
 /*import { isDark } from '~/composables/dark'*/
 
 import { useRouter } from 'vue-router'; // 导入 useRouter 钩子
 const router = useRouter(); // 使用 useRouter 钩子获取路由实例
-const gotoWork = () => {
+const gotoWork = async () => {
+  await myAxios.post('/buffer/start', {
+    buffer1size   : buf1Capa.value,
+    buffer2size   : buf2Capa.value,
+    buffer3size   : buf3Capa.value,
+    putbuffer1num : put1Num.value,
+    movebuffer2num: move2Num.value,
+    movebuffer3num: move3Num.value,
+    getbuffer2num : get2Num.value,
+    getbuffer3num : get3Num.value,
+    putspeed      : putSpeed.value,
+    movespeed     : moveSpeed.value,
+    getspeed      : getSpeed.value,
+  })
   console.log("跳转到运行界面");
   router.push('/work');
 };
@@ -79,24 +91,16 @@ const formatTooltip = (val: number) => {
       <el-slider v-model="get3Num" show-input/>
     </div>
     <div class="slider-demo-block mgl" style="margin-top: 10px">
-      <span class="demonstration">PUT1的速度</span>
-      <el-slider v-model="put1Speed" :format-tooltip="formatTooltip"/>
+      <span class="demonstration">PUT的速度</span>
+      <el-slider v-model="putSpeed" :format-tooltip="formatTooltip"/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">MOVE2的速度</span>
-      <el-slider v-model="move2Speed" :format-tooltip="formatTooltip" />
+      <span class="demonstration">MOVE的速度</span>
+      <el-slider v-model="moveSpeed" :format-tooltip="formatTooltip" />
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">MOVE3的速度</span>
-      <el-slider v-model="move3Speed" :format-tooltip="formatTooltip" />
-    </div>
-    <div class="slider-demo-block mgl">
-      <span class="demonstration">GET2的速度</span>
-      <el-slider v-model="get2Speed" :format-tooltip="formatTooltip" />
-    </div>
-    <div class="slider-demo-block mgl">
-      <span class="demonstration">GET3的速度</span>
-      <el-slider v-model="get3Speed" :format-tooltip="formatTooltip" />
+      <span class="demonstration">GET的速度</span>
+      <el-slider v-model="getSpeed" :format-tooltip="formatTooltip" />
     </div>
     <div class="setting_button_ " style="margin-bottom: 10px">
       <el-button @click="gotoWork" color="#626aef" size="large" class="custom-button-3">确认设置</el-button>
