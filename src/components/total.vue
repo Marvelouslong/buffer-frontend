@@ -81,7 +81,7 @@
 
 <!--again和ok-->
     <div class="button-group">
-      <button @click="towork">Again</button>
+      <button @click="towork">Back</button>
       <button @click="toindex">OK</button>
     </div>
   </div>

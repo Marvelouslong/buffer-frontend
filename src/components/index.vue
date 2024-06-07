@@ -73,4 +73,6 @@ const gotoIndex = () => {
   console.log("跳转到主页面");
   router.push('/input'); // 跳转到主页路由
 };
+//TODO 调History
+//TODO 总结平均评价
 </script>
