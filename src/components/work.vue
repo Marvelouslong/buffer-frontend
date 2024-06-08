@@ -20,7 +20,7 @@
           :visible="visible"
       >
         <template #reference>
-          <el-button type="success" class="el-button" @click="togglePopover">开始</el-button>
+          <el-button type="success" class="el-button" @click="startThreads">开始</el-button><!--togglePopover-->
         </template>
       </el-popover>
       <el-button type="danger" class="el-button" @click="toTotal">结束</el-button>
@@ -32,30 +32,42 @@
 import {ref} from "vue";
 import InfiniteList from "./InfiniteList.vue";
 import {useRouter} from "vue-router";
+import myAxios from "../plugins/myAxios.ts";
 
 const visible = ref(false)
-let isFirstClick = true;
+const isFirstClick = ref(true);
 const content = ref("暂停"); // 初始内容
 const router=useRouter();
-function togglePopover() {
-  if (isFirstClick) {
-    // 第一次点击时不显示弹出框
-    isFirstClick = false;
-  } else {
-    // 第二次及之后点击时显示弹出框
-    visible.value = true;
-    // 然后设置一个3秒的延时来隐藏弹出框
-    setTimeout(() => {
-      visible.value = false;
-    }, 1000);
+
+    async function startThreads() {
+      if (isFirstClick.value) {
+        // 发送 POST 请求到后端
+        try {
+          const response = await myAxios.post('/buffer/begin');
+          // 处理响应或显示消息给用户
+          console.log(response.data); // 打印 "Threads started successfully"
+          isFirstClick.value = false;
+        } catch (error) {
+          // 处理错误
+          console.error('Error starting threads:', error);
+        }
+      }else {
+        // 第二次及之后点击时显示弹出框
+        visible.value = true;
+        // 然后设置一个3秒的延时来隐藏弹出框
+        setTimeout(() => {
+          visible.value = false;
+        }, 1000);
+      }
   }
-}
+
 function changContent() {
   if (content.value === "暂停") {
     content.value = "继续";
   } else {
     content.value = "暂停";
   }
+
 }
 const toTotal = () => {
 
