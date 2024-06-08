@@ -23,7 +23,7 @@ const getSpeed= ref(60)
 import { useRouter } from 'vue-router'; // 导入 useRouter 钩子
 const router = useRouter(); // 使用 useRouter 钩子获取路由实例
 const gotoWork = async () => {
-  await myAxios.post('/buffer/start', {
+  const res = await myAxios.post('/buffer/start', {
     buffer1size   : buf1Capa.value,
     buffer2size   : buf2Capa.value,
     buffer3size   : buf3Capa.value,
@@ -36,8 +36,13 @@ const gotoWork = async () => {
     movespeed     : moveSpeed.value,
     getspeed      : getSpeed.value,
   })
-  console.log("跳转到运行界面");
-  router.push('/work');
+  if (res.status === 200 &&"success" === res.data) {
+    console.log("跳转到运行界面");
+    router.push('/work');
+  } else {
+
+    console.log("提交失败");
+  }
 };
 /*设置速度的最高值：5秒运动一次*/
 const formatTooltip = (val: number) => {
