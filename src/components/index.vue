@@ -6,6 +6,22 @@
         </el-header>
       </el-container>
       <div class="button-container">
+        <el-button @click="showHistoryDialog" type="primary" class="custom-button-3">历史</el-button>
+      </div>
+        <div v-if="buffer1Data && buffer2Data && buffer3Data">
+          <!-- 显示buffer1的数据 -->
+          <h3>Buffer 1</h3>
+          <p v-if="buffer1Data">Message: {{ buffer1Data }}</p>
+          <!-- 其他buffer1的字段... -->
+
+          <!-- 显示buffer2和buffer3的数据（类似地） -->
+          <!-- ... -->
+        </div>
+        <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+      <div class="button-container">
         <el-button @click="gotoIndex" type="primary" class="custom-button-3">启动</el-button>
       </div>
     </div>
@@ -67,6 +83,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'; // 导入 useRouter 钩子
+import { ref } from 'vue';
+import myAxios from "../plugins/myAxios.ts";
 
 const router = useRouter(); // 使用 useRouter 钩子获取路由实例
 const gotoIndex = () => {
@@ -74,5 +92,51 @@ const gotoIndex = () => {
   router.push('/input'); // 跳转到主页路由
 };
 //TODO 调History
+    const dialogVisible = ref(false);
+    const buffersLoaded = ref(false); // 用来标记数据是否已加载
+    const buffer1Data = ref<null | { message: string }>(null);
+    const buffer2Data = ref(null);
+    const buffer3Data = ref(null);
+    async function fetchHistoryData() {
+      try {
+        const response = await myAxios.get('/buffer/getHistory'); // 调用后端API
+        // 解析响应数据（这里只是一个示例，你需要根据实际的响应结构来解析）
+        buffer1Data.value = response.data.buffer1;
+        buffer2Data.value = response.data.buffer2;
+        buffer3Data.value = response.data.buffer3;
+        buffersLoaded.value = true; // 标记数据已加载
+      } catch (error) {
+        console.error('Error fetching history data:', error);
+      }
+    }
+
+    function showHistoryDialog() {
+      dialogVisible.value = true;
+      fetchHistoryData(); // 在显示弹出框时获取数据
+    }
+// 暴露给模板的变量和方法
+  defineExpose({
+    dialogVisible,
+    buffer1Data,
+    buffer2Data,
+    buffer3Data,
+    buffersLoaded, // 如果模板需要用到这个状态，也可以暴露
+    showHistoryDialog,
+    gotoIndex,
+  });
+
+/*const resultData = ref(null); // 用于存储从后端获取的数据
+
+const fetchResultData = async () => {
+  try {
+    // 假设你的API接口返回单个result数据，这里使用模拟的URL
+    const response = await axios.get('/api/result/5'); // 获取ID为1的result数据
+    resultData.value = response.data; // 假设后端返回的数据结构与你的result表结构一致
+  } catch (error) {
+    console.error('Error fetching result data:', error);
+  }
+};
+
+onMounted(fetchResultData); // 组件挂载后获取数据*/
 //TODO 总结平均评价
 </script>
