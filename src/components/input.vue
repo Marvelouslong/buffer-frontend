@@ -2,17 +2,17 @@
 import { ref } from 'vue'
 import myAxios from "../plugins/myAxios.ts";
 
-const buf1Capa = ref(4)
-const buf2Capa = ref(3)
-const buf3Capa = ref(3)
+const buf1Capa = ref(6)
+const buf2Capa = ref(6)
+const buf3Capa = ref(6)
 
-const put1Num = ref(3)
+const put1Num = ref(6)
 
 const move2Num= ref(2)
 const move3Num = ref(2)
 
-const get2Num = ref(3)
-const get3Num= ref(3)
+const get2Num = ref(1)
+const get3Num= ref(1)
 
 const putSpeed= ref(1)
 const moveSpeed= ref(1)
