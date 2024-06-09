@@ -2,21 +2,21 @@
 import { ref } from 'vue'
 import myAxios from "../plugins/myAxios.ts";
 
-const buf1Capa = ref(10)
-const buf2Capa = ref(20)
-const buf3Capa = ref(20)
+const buf1Capa = ref(4)
+const buf2Capa = ref(3)
+const buf3Capa = ref(3)
 
-const put1Num = ref(10)
+const put1Num = ref(3)
 
-const move2Num= ref(20)
-const move3Num = ref(20)
+const move2Num= ref(2)
+const move3Num = ref(2)
 
-const get2Num = ref(20)
-const get3Num= ref(20)
+const get2Num = ref(3)
+const get3Num= ref(3)
 
-const putSpeed= ref(60)
-const moveSpeed= ref(60)
-const getSpeed= ref(60)
+const putSpeed= ref(1)
+const moveSpeed= ref(1)
+const getSpeed= ref(1)
 
 /*import { isDark } from '~/composables/dark'*/
 
@@ -44,11 +44,6 @@ const gotoWork = async () => {
     console.log("提交失败");
   }
 };
-/*设置速度的最高值：5秒运动一次*/
-const formatTooltip = (val: number) => {
-  return val / 20
-}
-
 </script>
 
 
@@ -96,16 +91,16 @@ const formatTooltip = (val: number) => {
       <el-slider v-model="get3Num" show-input/>
     </div>
     <div class="slider-demo-block mgl" style="margin-top: 10px">
-      <span class="demonstration">PUT的速度</span>
-      <el-slider v-model="putSpeed" :format-tooltip="formatTooltip"/>
+      <span class="demonstration">PUT的速度 /s</span>
+      <el-slider v-model="putSpeed" :max="5" />
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">MOVE的速度</span>
-      <el-slider v-model="moveSpeed" :format-tooltip="formatTooltip" />
+      <span class="demonstration">MOVE的速度 /s</span>
+      <el-slider v-model="moveSpeed" :max="5" />
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">GET的速度</span>
-      <el-slider v-model="getSpeed" :format-tooltip="formatTooltip" />
+      <span class="demonstration">GET的速度 /s</span>
+      <el-slider v-model="getSpeed" :max="5" />
     </div>
     <div class="setting_button_ " style="margin-bottom: 10px">
       <el-button @click="gotoWork" color="#626aef" size="large" class="custom-button-3">确认设置</el-button>
