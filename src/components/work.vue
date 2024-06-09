@@ -73,7 +73,6 @@ async function startThreads() {
         clearInterval(intervalId)
       }
       intervalId = setInterval(fetchData, 500); // 每0.05秒调用一次 fetchData
-      // intervalId = setInterval(fetchData1, 500); // 每0.05秒调用一次 fetchData
     } catch (error) {
       // 处理错误
       console.error('Error starting threads:', error);
@@ -98,20 +97,13 @@ const fetchData=async () => {
     console.error('Error fetching data:', error);
   }
 }
-// const fetchData1=async () => {
-//   try {
-//     const response1 = await myAxios.get('/buffer/getbuffer');
-//     // 假设返回的数据结构与你的变量相对应
-//
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//   }
-// }
-function changContent() {
+async function changContent() {
   if (content.value === "暂停") {
     content.value = "继续";
+    await myAxios.post('/buffer/pause', String(true));
   } else {
     content.value = "暂停";
+    await myAxios.post('/buffer/pause', String(false));
   }
 }
 const toTotal = () => {

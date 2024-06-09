@@ -50,10 +50,25 @@ const fetchData=async () => {
     console.error('Error fetching data:', error);
   }
 }
-
+const fetchMessage=async () => {
+  try {
+    const response = await myAxios.get('/buffer/getBuffer',{
+      params: {
+        bufferValue: props.bufferValue, // 这里将 bufferValue 作为查询参数发送
+      }
+    });
+    bufferdata.value = response.data.data1;
+    datanum.value = response.data.contentNum;
+    putnum.value = response.data.putbuffernum;
+    getnum.value = response.data.getbuffernum;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
 onMounted(() => {
   max.value = innerRef.value!.clientHeight - 380
-  intervalId = setInterval(fetchData, 500); // 每1秒调用一次 fetchData
+  intervalId = setInterval(fetchData, 500); // 每0.05秒调用一次 fetchData
+  intervalId = setInterval(fetchMessage, 500); // 每0.05秒调用一次 fetchData
 })
 // 在组件卸载前清除定时器
 onUnmounted(() => {
