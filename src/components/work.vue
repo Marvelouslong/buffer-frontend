@@ -106,8 +106,36 @@ async function changContent() {
     await myAxios.post('/buffer/pause', String(false));
   }
 }
-const toTotal = () => {
-  router.push({ path: '/total' })
+const toTotal = async () => {
+  try {
+    const res = await myAxios.get('/buffer/total');
+    if (res.status === 200) {
+      const data = res.data;
+      if (data) {
+        const queryParams = new URLSearchParams();
+        queryParams.append('runTime', data.runTime.toString());
+        queryParams.append('avgBufferNum', data.avgBufferNum.toString());
+        queryParams.append('putBuffer1Num', data.putBuffer1Num.toString());
+        queryParams.append('getBuffer1Num', data.getBuffer1Num.toString());
+        queryParams.append('putBuffer2Num', data.putBuffer2Num.toString());
+        queryParams.append('getBuffer2Num', data.getBuffer2Num.toString());
+        queryParams.append('putBuffer3Num', data.putBuffer3Num.toString());
+        queryParams.append('getBuffer3Num', data.getBuffer3Num.toString());
+        queryParams.append('buffer1ContentNum', data.buffer1ContentNum.toString());
+        queryParams.append('buffer2ContentNum', data.buffer2ContentNum.toString());
+        queryParams.append('buffer3ContentNum', data.buffer3ContentNum.toString());
+        const queryObject = Object.fromEntries(queryParams); // 简化转换
+        // 导航到 'Total' 路由并附带查询参数
+        router.push({ path: '/total', query: queryObject });
+      } else {
+        console.log("从后端获取的数据是空！");
+      }
+    } else {
+      console.log("请求失败，状态码:", res.status);
+    }
+  } catch (error) {
+    console.error("发生错误:", error);
+  }
 };
 </script>
 

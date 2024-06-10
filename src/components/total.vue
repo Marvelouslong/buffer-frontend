@@ -13,14 +13,16 @@
     <div class="title-size">{{ title }}</div>
     <!--时间和平均-->
     <el-input
-          v-model="input1"
+          disabled="true"
+          v-model="runtime"
           style="max-width: 600px"
           placeholder="时间示例"
       >
         <template #prepend>总的运行时间为</template>
       </el-input>
     <el-input
-        v-model="input2"
+        disabled="true"
+        v-model="avgbuffernum"
         style="max-width: 600px"
         placeholder="平均buffer示例"
     >
@@ -36,13 +38,13 @@
         trigger="click"
 
     >
-      <el-table :data="gridData1">
-        <el-table-column width="150" property="date" label="buffer1中已有" />
-        <el-table-column width="100" property="name" label="已存" />
-        <el-table-column width="300" property="address" label="已取" />
+      <el-table :data="getbuffer1">
+        <el-table-column width="150"  property="data1" label="buffer1中数据" />
+        <el-table-column width="100" property="put1" label="已存" />
+        <el-table-column width="300" property="get1" label="已取" />
       </el-table>
       <template #reference>
-        <el-button style="margin-right: 16px">B1history</el-button>
+        <el-button style="margin-right: 16px">B1汇总</el-button>
       </template>
     </el-popover>
 
@@ -52,13 +54,13 @@
         width="400"
         trigger="click"
     >
-      <el-table :data="gridData2">
-        <el-table-column width="150" property="date" label="buffer2中已有" />
-        <el-table-column width="100" property="name" label="已存" />
-        <el-table-column width="300" property="address" label="已取" />
+      <el-table :data="getbuffer2">
+        <el-table-column width="150" property="data2" label="buffer2中数据" />
+        <el-table-column width="100" property="put2" label="已存" />
+        <el-table-column width="300" property="get2" label="已取" />
       </el-table>
       <template #reference>
-        <el-button style="margin-right: 16px">B2history</el-button>
+        <el-button style="margin-right: 16px">B2汇总</el-button>
       </template>
     </el-popover>
 
@@ -68,13 +70,13 @@
         width="400"
         trigger="click"
     >
-      <el-table :data="gridData3">
-        <el-table-column width="150" property="date" label="buffer3中已有" />
-        <el-table-column width="100" property="name" label="已存" />
-        <el-table-column width="300" property="address" label="已取" />
+      <el-table :data="getbuffer3">
+        <el-table-column width="150" property="data3" label="buffer3中数据" />
+        <el-table-column width="100" property="put3" label="已存" />
+        <el-table-column width="300" property="get3" label="已取" />
       </el-table>
       <template #reference>
-        <el-button>b3history</el-button>
+        <el-button>b3汇总</el-button>
       </template>
     </el-popover>
   </div>
@@ -90,37 +92,39 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import {useRouter} from "vue-router";
+import { ref, onMounted} from 'vue';
+import {useRouter,useRoute} from "vue-router";
+const route = useRoute();
+/*import myAxios from "../plugins/myAxios.ts";*/
 const value = ref();
-const input1 = ref('')
-const input2 = ref('')
+const runtime = ref(route.query.runTime);
+const avgbuffernum = ref(route.query.avgBufferNum);
 // 定义响应式数据
 const title = ref('buffer汇总数据');
 const router=useRouter();
 
 // 假设的 gridData
-const gridData1 = ref([
+const getbuffer1 = ref([
   {
-    date: '10',
-    name: '2',
-    address: '3',
+    data1:ref(route.query.buffer1ContentNum),
+    put1: ref(route.query.putBuffer1Num),
+    get1: ref(route.query.getBuffer1Num),
   },
 
 ]);
-const gridData2 = ref([
+const getbuffer2 = ref([
   {
-    date: '10',
-    name: '2',
-    address: '3',
+    data2:ref(route.query.buffer2ContentNum),
+    put2: ref(route.query.putBuffer2Num),
+    get2: ref(route.query.getBuffer2Num),
   },
 
 ]);
-const gridData3 = ref([
+const getbuffer3 = ref([
   {
-    date: '10',
-    name: '2',
-    address: '3',
+    data3:ref(route.query.buffer3ContentNum),
+    put3: ref(route.query.putBuffer3Num),
+    get3: ref(route.query.getBuffer3Num),
   },
 
 ]);
@@ -132,7 +136,7 @@ const towork=()=>
 {
   router.push({ path: '/work' });
 }
-
+onMounted(() => {});
 </script>
 
 <style scoped>
