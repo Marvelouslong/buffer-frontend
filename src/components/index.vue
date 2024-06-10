@@ -11,78 +11,154 @@
       <el-dialog v-model="drawer" title="历史记录" :with-header="false" class="custom-drawer" width="500">
                 <div v-for="(item, index) in allBufferData" :key="index">
                   <h4>Buffer ID: {{ item.buffer_id }}</h4>
-                  <div>
-                    <h4>Buffer 1 </h4>
-        <!--            <p>ID: {{ item.buffer1Item.buffer1_id }}</p>-->
-<!--                    <p>message: </p>
-                    <p v-html="replaceSemicolonWithNewline(item.buffer1Item.message)"></p>-->
-                    <p v-if="item.buffer1Item.message !== null">
-                      message: <span v-html="replaceSemicolonWithNewline(item.buffer1Item.message)"></span>
-                    </p>
-                    <p v-else>
-                      message: (无消息)
-                    </p>
-                    <p v-if="item.buffer1Item.data !== null">
-                      Data: {{ item.buffer1Item.data }}
-                    </p>
-                    <p v-else>
-                      Data: (无数据)
-                    </p>
-                    <p>Content Number: {{ item.buffer1Item.contentnum }}</p>
-                    <p>Free Space Number: {{ item.buffer1Item.freespacenum }}</p>
+                  <h3>Buffer 1 </h3>
+                  <div class="table-container"> <!-- 添加一个包含表格的容器 -->
+                    <table class="centered-table">
+                    <thead>
+                    <tr>
+                      <th>属性</th>
+                      <th style="width: 100px">值</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>message</td>
+                      <td>
+                        <span v-if="item.buffer1Item.message !== null" v-html="replaceSemicolonWithNewline(item.buffer1Item.message)"></span>
+                        <span v-else>(无消息)</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Data</td>
+                      <td>
+                        <span v-if="item.buffer1Item.data !== null">{{ item.buffer1Item.data }}</span>
+                        <span v-else>(无数据)</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>contentNum</td>
+                      <td>{{ item.buffer1Item.contentnum }}</td>
+                    </tr>
+                    <tr>
+                      <td>freespaceNum</td>
+                      <td>{{ item.buffer1Item.freespacenum }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
                   </div>
-                  <div>
-                    <h4>Buffer 2 </h4>
-        <!--            <p>ID: {{ item.buffer2Item.buffer2_id }}</p>-->
-<!--                    <p>message: </p>
-                    <p v-html="replaceSemicolonWithNewline(item.buffer2Item.message)"></p>
-                    <p>Data: {{ item.buffer2Item.data }}</p>-->
-                    <p v-if="item.buffer2Item.message !== null">
-                      message: <span v-html="replaceSemicolonWithNewline(item.buffer2Item.message)"></span>
-                    </p>
-                    <p v-else>
-                      message: (无消息)
-                    </p>
-                    <p v-if="item.buffer2Item.data !== null">
-                      Data: {{ item.buffer2Item.data }}
-                    </p>
-                    <p v-else>
-                      Data: (无数据)
-                    </p>
-                    <p>Content Number: {{ item.buffer2Item.contentnum }}</p>
-                    <p>Free Space Number: {{ item.buffer2Item.freespacenum }}</p>
+                  <h3>Buffer 2 </h3>
+                  <div class="table-container"> <!-- 添加一个包含表格的容器 -->
+                    <table class="centered-table">
+                      <thead>
+                      <tr>
+                        <th>属性</th>
+                        <th>值</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>message</td>
+                        <td>
+                          <span v-if="item.buffer2Item.message !== null" v-html="replaceSemicolonWithNewline(item.buffer2Item.message)"></span>
+                          <span v-else>(无消息)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>
+                          <span v-if="item.buffer2Item.data !== null">{{ item.buffer2Item.data }}</span>
+                          <span v-else>(无数据)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>contentNum</td>
+                        <td>{{ item.buffer2Item.contentnum }}</td>
+                      </tr>
+                      <tr>
+                        <td>freespaceNum</td>
+                        <td>{{ item.buffer2Item.freespacenum }}</td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div>
-                  <h4>Buffer 3 </h4>
-        <!--          <p>ID: {{ item.buffer3Item.buffer3_id }}</p>-->
-<!--                  <p>message: </p>
-                  <p v-html="replaceSemicolonWithNewline(item.buffer3Item.message)"></p>
-                  <p>Data: {{ item.buffer3Item.data }}</p>-->
-                    <p v-if="item.buffer3Item.message !== null">
-                      message: <span v-html="replaceSemicolonWithNewline(item.buffer3Item.message)"></span>
-                    </p>
-                    <p v-else>
-                      message: (无消息)
-                    </p>
-                    <p v-if="item.buffer3Item.data !== null">
-                      Data: {{ item.buffer3Item.data }}
-                    </p>
-                    <p v-else>
-                      Data: (无数据)
-                    </p>
-                  <p>Content Number: {{ item.buffer3Item.contentnum }}</p>
-                  <p>Free Space Number: {{ item.buffer3Item.freespacenum }}</p>
-                </div>
-                  <div>
-                    <h4>Result </h4>
-        <!--            <p>ID: {{ item.resultItem.rs_id }}</p>-->
-                    <p>Runtime: {{item.resultItem.Runtime}}</p>
-                    <p>putbuffer1num: {{item.resultItem.putbuffer1num}}</p>
-                    <p>putbuffer2num: {{item.resultItem.putbuffer2num}}</p>
-                    <p>putbuffer3num: {{item.resultItem.putbuffer3num}}</p>
-                    <p>getbuffer1num: {{item.resultItem.getbuffer1num}}</p>
-                    <p>getbuffer2num: {{item.resultItem.getbuffer1num}}</p>
-                    <p>getbuffer3num: {{item.resultItem.getbuffer1num}}</p>
+                  <h3>Buffer 3 </h3>
+                  <div class="table-container"> <!-- 添加一个包含表格的容器 -->
+                    <table class="centered-table">
+                      <thead>
+                      <tr>
+                        <th>属性</th>
+                        <th style="width: 100px">值</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>message</td>
+                        <td>
+                          <span v-if="item.buffer3Item.message !== null" v-html="replaceSemicolonWithNewline(item.buffer3Item.message)"></span>
+                          <span v-else>(无消息)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Data</td>
+                        <td>
+                          <span v-if="item.buffer3Item.data !== null">{{ item.buffer3Item.data }}</span>
+                          <span v-else>(无数据)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>contentNum</td>
+                        <td>{{ item.buffer3Item.contentnum }}</td>
+                      </tr>
+                      <tr>
+                        <td>freespaceNum</td>
+                        <td>{{ item.buffer3Item.freespacenum }}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <h3>Result</h3>
+                  <div class="table-container"> <!-- 添加一个包含表格的容器 -->
+                    <table class="centered-table">
+                      <thead>
+                      <tr>
+                        <th>属性</th>
+                        <th style="width: 100px">值</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>Runtime</td>
+                      </tr>
+                      <tr>
+                        <td>putbuffer1num</td>
+                        <td>{{item.resultItem.putbuffer1num}}</td>
+                      </tr>
+                      <tr>
+                        <td>putbuffer2num</td>
+                        <td>{{item.resultItem.putbuffer2num}}</td>
+                      </tr>
+                      <tr>
+                        <td>putbuffer3num</td>
+                        <td>{{item.resultItem.putbuffer3num}}</td>
+                      </tr>
+                      <tr>
+                        <td>getbuffer1num</td>
+                        <td>{{item.resultItem.getbuffer1num}}</td>
+                      </tr>
+                      <tr>
+                        <td>getbuffer2num</td>
+                        <td>{{item.resultItem.getbuffer2num}}</td>
+                      </tr>
+                      <tr>
+                        <td>getbuffer3num</td>
+                        <td>{{item.resultItem.getbuffer3num}}</td>
+                      </tr>
+                      <tr>
+                        <td>avgbuffernum</td>
+                        <td>{{item.resultItem.avgbuffernum}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </div>
                   <p>-----------------------------------------------------------------------------</p>
                 </div>
@@ -269,6 +345,34 @@ async function fetchHistoryData() {
 /* 如果抽屉是右侧滑出的（默认），并且你想要设置它的最小宽度 */
 .el-drawer__body {
   min-width: 600px; /* 根据需要调整 */
+}
+
+.table-container {
+  /* 使容器居中（如果需要的话），例如使用flex布局 */
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中（如果需要）*/
+  height: 40vh; /* 假设你希望容器占据全屏高度 */
+}
+
+.centered-table {
+  /* 表格最大宽度为其容器的100% */
+  max-width: 100%;
+  width: 70%;
+  /* 其他样式可以根据需要添加 */
+  border-collapse: collapse; /* 合并边框 */
+  border: 1px solid rgb(221, 221, 221); /* 添加1像素宽、实线、黑色的边框 */
+  border-collapse: collapse; /* 合并相邻的边框 */
+  /*width: 100%; !* 设置表格宽度为100% *!
+  max-width: 100%; !* 防止表格宽度超过其容器宽度 *!*/
+  margin: 0 auto; /* 如果需要，水平居中表格（但这通常不是必要的，因为表格默认会占据全部宽度）*/
+}
+
+/* 如果有必要，可以给表格添加边距或内边距 */
+.centered-table td, .centered-table th {
+  text-align: left; /* 默认文本左对齐 */
+  border: 1px solid #ddd; /* 为单元格也添加边框，颜色可以根据需要调整 */
+  padding: 8px; /* 添加内边距，使边框之间的内容有空间 */
 }
 /* 其他样式 */
 </style>
