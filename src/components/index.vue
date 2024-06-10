@@ -9,48 +9,83 @@
         <el-button plain @click="showHistoryDialog" type="primary" class="custom-button-3">历史</el-button>
       </div>
       <el-dialog v-model="drawer" title="历史记录" :with-header="false" class="custom-drawer" width="500">
-        <div v-for="(item, index) in allBufferData" :key="index">
-          <h4>Buffer ID: {{ item.buffer_id }}</h4>
-          <div>
-            <h4>Buffer 1 </h4>
-<!--            <p>ID: {{ item.buffer1Item.buffer1_id }}</p>-->
-            <p>message: </p>
-            <p v-html="replaceSemicolonWithNewline(item.buffer1Item.message)"></p>
-            <p>Data: {{ item.buffer1Item.data }}</p>
-            <p>Content Number: {{ item.buffer1Item.contentnum }}</p>
-            <p>Free Space Number: {{ item.buffer1Item.freespacenum }}</p>&ndash;&gt;
-          </div>
-          <div>
-            <h4>Buffer 2 </h4>
-<!--            <p>ID: {{ item.buffer2Item.buffer2_id }}</p>-->
-            <p>message: </p>
-            <p v-html="replaceSemicolonWithNewline(item.buffer2Item.message)"></p>
-            <p>Data: {{ item.buffer2Item.data }}</p>
-            <p>Content Number: {{ item.buffer2Item.contentnum }}</p>
-            <p>Free Space Number: {{ item.buffer2Item.freespacenum }}</p>&ndash;&gt;
-          </div>
-          <div>
-          <h4>Buffer 3 </h4>
-<!--          <p>ID: {{ item.buffer3Item.buffer3_id }}</p>-->
-          <p>message: </p>
-          <p v-html="replaceSemicolonWithNewline(item.buffer3Item.message)"></p>
-          <p>Data: {{ item.buffer3Item.data }}</p>
-          <p>Content Number: {{ item.buffer3Item.contentnum }}</p>
-          <p>Free Space Number: {{ item.buffer3Item.freespacenum }}</p>&ndash;&gt;
-        </div>
-          <div>
-            <h4>Result </h4>
-<!--            <p>ID: {{ item.resultItem.rs_id }}</p>-->
-            <p>Runtime: {{item.resultItem.Runtime}}</p>
-            <p>putbuffer1num: {{item.resultItem.putbuffer1num}}</p>
-            <p>putbuffer2num: {{item.resultItem.putbuffer2num}}</p>
-            <p>putbuffer3num: {{item.resultItem.putbuffer3num}}</p>
-            <p>getbuffer1num: {{item.resultItem.getbuffer1num}}</p>
-            <p>getbuffer2num: {{item.resultItem.getbuffer1num}}</p>
-            <p>getbuffer3num: {{item.resultItem.getbuffer1num}}</p>&ndash;&gt;
-          </div>
-          <p>-----------------------------------------------------------------------------</p>
-        </div>
+                <div v-for="(item, index) in allBufferData" :key="index">
+                  <h4>Buffer ID: {{ item.buffer_id }}</h4>
+                  <div>
+                    <h4>Buffer 1 </h4>
+        <!--            <p>ID: {{ item.buffer1Item.buffer1_id }}</p>-->
+<!--                    <p>message: </p>
+                    <p v-html="replaceSemicolonWithNewline(item.buffer1Item.message)"></p>-->
+                    <p v-if="item.buffer1Item.message !== null">
+                      message: <span v-html="replaceSemicolonWithNewline(item.buffer1Item.message)"></span>
+                    </p>
+                    <p v-else>
+                      message: (无消息)
+                    </p>
+                    <p v-if="item.buffer1Item.data !== null">
+                      Data: {{ item.buffer1Item.data }}
+                    </p>
+                    <p v-else>
+                      Data: (无数据)
+                    </p>
+                    <p>Content Number: {{ item.buffer1Item.contentnum }}</p>
+                    <p>Free Space Number: {{ item.buffer1Item.freespacenum }}</p>
+                  </div>
+                  <div>
+                    <h4>Buffer 2 </h4>
+        <!--            <p>ID: {{ item.buffer2Item.buffer2_id }}</p>-->
+<!--                    <p>message: </p>
+                    <p v-html="replaceSemicolonWithNewline(item.buffer2Item.message)"></p>
+                    <p>Data: {{ item.buffer2Item.data }}</p>-->
+                    <p v-if="item.buffer2Item.message !== null">
+                      message: <span v-html="replaceSemicolonWithNewline(item.buffer2Item.message)"></span>
+                    </p>
+                    <p v-else>
+                      message: (无消息)
+                    </p>
+                    <p v-if="item.buffer2Item.data !== null">
+                      Data: {{ item.buffer2Item.data }}
+                    </p>
+                    <p v-else>
+                      Data: (无数据)
+                    </p>
+                    <p>Content Number: {{ item.buffer2Item.contentnum }}</p>
+                    <p>Free Space Number: {{ item.buffer2Item.freespacenum }}</p>
+                  </div>
+                  <div>
+                  <h4>Buffer 3 </h4>
+        <!--          <p>ID: {{ item.buffer3Item.buffer3_id }}</p>-->
+<!--                  <p>message: </p>
+                  <p v-html="replaceSemicolonWithNewline(item.buffer3Item.message)"></p>
+                  <p>Data: {{ item.buffer3Item.data }}</p>-->
+                    <p v-if="item.buffer3Item.message !== null">
+                      message: <span v-html="replaceSemicolonWithNewline(item.buffer3Item.message)"></span>
+                    </p>
+                    <p v-else>
+                      message: (无消息)
+                    </p>
+                    <p v-if="item.buffer3Item.data !== null">
+                      Data: {{ item.buffer3Item.data }}
+                    </p>
+                    <p v-else>
+                      Data: (无数据)
+                    </p>
+                  <p>Content Number: {{ item.buffer3Item.contentnum }}</p>
+                  <p>Free Space Number: {{ item.buffer3Item.freespacenum }}</p>
+                </div>
+                  <div>
+                    <h4>Result </h4>
+        <!--            <p>ID: {{ item.resultItem.rs_id }}</p>-->
+                    <p>Runtime: {{item.resultItem.Runtime}}</p>
+                    <p>putbuffer1num: {{item.resultItem.putbuffer1num}}</p>
+                    <p>putbuffer2num: {{item.resultItem.putbuffer2num}}</p>
+                    <p>putbuffer3num: {{item.resultItem.putbuffer3num}}</p>
+                    <p>getbuffer1num: {{item.resultItem.getbuffer1num}}</p>
+                    <p>getbuffer2num: {{item.resultItem.getbuffer1num}}</p>
+                    <p>getbuffer3num: {{item.resultItem.getbuffer1num}}</p>
+                  </div>
+                  <p>-----------------------------------------------------------------------------</p>
+                </div>
         </el-dialog>
       <div class="button-container">
         <el-button @click="gotoIndex" type="primary" class="custom-button-3">启动</el-button>
