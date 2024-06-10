@@ -8,7 +8,7 @@
     <p>已取出数据个数{{getnum}}</p>
     <el-scrollbar ref="scrollbarRef" style="height: 300px;width: 290px;margin: 30px 10px;">
       <div ref="innerRef">
-        <p v-for="item in 20" :key="item" class="scrollbar-demo-item">
+        <p v-for="item in messageArray" :key="item" class="scrollbar-demo-item">
           {{ item }}
         </p>
       </div>
@@ -35,6 +35,8 @@ const bufferdata=ref(0);
 const putnum=ref(0);
 const getnum=ref(0);
 let intervalId: null | NodeJS.Timeout =null;
+const message = ref('');
+const messageArray = ref<string[]>([]);
 const fetchData=async () => {
   try {
     const response = await myAxios.get('/buffer/getBuffer',{
@@ -45,22 +47,10 @@ const fetchData=async () => {
     bufferdata.value = response.data.data1;
     datanum.value = response.data.contentNum;
     putnum.value = response.data.putbuffernum;
+    message.value=response.data.message1;
     getnum.value = response.data.getbuffernum;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
-const fetchMessage=async () => {
-  try {
-    const response = await myAxios.get('/buffer/getBuffer',{
-      params: {
-        bufferValue: props.bufferValue, // 这里将 bufferValue 作为查询参数发送
-      }
-    });
-    bufferdata.value = response.data.data1;
-    datanum.value = response.data.contentNum;
-    putnum.value = response.data.putbuffernum;
-    getnum.value = response.data.getbuffernum;
+
+    messageArray.value = message.value.split(';').filter(item => item.trim() !== '');
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -68,7 +58,6 @@ const fetchMessage=async () => {
 onMounted(() => {
   max.value = innerRef.value!.clientHeight - 380
   intervalId = setInterval(fetchData, 500); // 每0.05秒调用一次 fetchData
-  intervalId = setInterval(fetchMessage, 500); // 每0.05秒调用一次 fetchData
 })
 // 在组件卸载前清除定时器
 onUnmounted(() => {
