@@ -18,7 +18,7 @@
           style="max-width: 600px"
           placeholder="时间示例"
       >
-        <template #prepend>总的运行时间为</template>
+        <template #prepend>总的运行时间/s</template>
       </el-input>
     <el-input
         disabled="true"

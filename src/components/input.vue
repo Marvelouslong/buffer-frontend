@@ -71,23 +71,23 @@ const gotoWork = async () => {
     <el-slider v-model="buf3Capa" show-input />
    </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">buf1的PUT1数量</span>
+      <span class="demonstration">PUTbuf1线程数量</span>
       <el-slider v-model="put1Num" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">buf2的MOVE2数量</span>
+      <span class="demonstration">MOVEbuf2线程数</span>
       <el-slider v-model="move2Num" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">buf3的MOVE3数量</span>
+      <span class="demonstration">MOVEbuf3线程数</span>
       <el-slider v-model="move3Num" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">buf2的GET2数量</span>
+      <span class="demonstration">GETbuf2线程数量</span>
       <el-slider v-model="get2Num" show-input/>
     </div>
     <div class="slider-demo-block mgl">
-      <span class="demonstration">buf3的GET3数量</span>
+      <span class="demonstration">GETbuf3线程数量</span>
       <el-slider v-model="get3Num" show-input/>
     </div>
     <div class="slider-demo-block mgl" style="margin-top: 10px">
